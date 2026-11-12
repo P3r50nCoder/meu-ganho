@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Ganho</title>
+
+    <meta name="theme-color" content="#101512">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Meu Ganho</h1>
+        <p>Controle de produção e ganhos</p>
+    </header>
+
+    <main>
+        <section class="resumo">
+            <h2>Ganhos do mês</h2>
+            <p id="totalMes">R$ 0,00</p>
+        </section>
+
+        <section class="producao">
+            <h2>Registrar produção</h2>
+
+            <label for="alicatinhos">Quantidade de alicatinhos</label>
+            <input type="number" id="alicatinhos" min="0" value="0">
+
+            <label for="molinhas">Quantidade de molinhas</label>
+            <input type="number" id="molinhas" min="0" value="0">
+
+            <label for="espatulas">Quantidade de espátulas</label>
+            <input type="number" id="espatulas" min="0" value="0">
+
+            <button id="btnRegistrar">
+                Registrar produção
+            </button>
+        </section>
+
+<section class="historico">
+    <h2>Histórico de produção</h2>
+
+    <div id="listaHistorico">
+        <p>Nenhum registro encontrado.</p>
+    </div>
+</section>
+
+        </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

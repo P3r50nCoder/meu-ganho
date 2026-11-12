@@ -1,0 +1,255 @@
+
+/* Configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f3f6;
+    color: #222;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+    margin-bottom: 25px;
+}
+
+header h1 {
+    font-size: 28px;
+    color: #172b4d;
+}
+
+header p {
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Resumo dos ganhos */
+.resumo {
+    background: #172b4d;
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.resumo h2 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.resumo p {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+/* Área de produção */
+.producao {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.producao h2 {
+    margin-bottom: 20px;
+    color: #172b4d;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 8px;
+    background: #198754;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #146c43;
+}
+
+
+/* Histórico de produção */
+.historico {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 25px;
+}
+
+.historico h2 {
+    color: #172b4d;
+    margin-bottom: 20px;
+}
+
+.registro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.registro-info p {
+    margin-top: 5px;
+    color: #777;
+    font-size: 13px;
+}
+
+.registro-valor {
+    color: #198754;
+    font-weight: bold;
+}
+
+.btn-excluir {
+    background: #dc3545;
+    width: auto;
+    padding: 8px 12px;
+    margin: 8px 0 0;
+    font-size: 12px;
+}
+
+.btn-excluir:hover {
+    background: #bb2d3b;
+}
+
+
+/* ===== NOVO VISUAL MEU GANHO ===== */
+
+body {
+    background: #101512;
+    color: #f1f5f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Cabeçalho */
+header h1 {
+    color: #36d399;
+}
+
+header p {
+    color: #9aa99f;
+}
+
+/* Cartão dos ganhos */
+.resumo {
+    background: linear-gradient(135deg, #1c2821, #263b2e);
+    border: 1px solid #304b3a;
+    box-shadow: 0 8px 25px #00000030;
+}
+
+.resumo p {
+    color: #36d399;
+}
+
+/* Cartões principais */
+.producao,
+.historico {
+    background: #1a211d;
+    border: 1px solid #2b3830;
+    box-shadow: 0 8px 25px #00000025;
+}
+
+.producao h2,
+.historico h2 {
+    color: #36d399;
+}
+
+/* Campos */
+label {
+    color: #e1e9e3;
+}
+
+input {
+    background: #101512;
+    color: white;
+    border: 1px solid #35443a;
+}
+
+input:focus {
+    outline: 2px solid #36d399;
+    border-color: transparent;
+}
+
+/* Botões */
+button {
+    background: #198754;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #20a568;
+    transform: translateY(-1px);
+}
+
+/* Histórico */
+.registro {
+    border-bottom: 1px solid #303b33;
+}
+
+.registro-info strong {
+    color: #f1f5f2;
+}
+
+.registro-info p {
+    color: #9aa99f;
+}
+
+.registro-valor {
+    color: #36d399;
+}
+
+/* Exclusão */
+.btn-excluir {
+    background: #b8323e;
+}
+
+.btn-excluir:hover {
+    background: #d13c49;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .resumo,
+    .producao,
+    .historico {
+        padding: 18px;
+    }
+
+    .resumo p {
+        font-size: 28px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+}
