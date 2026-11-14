@@ -42,6 +42,112 @@ function salvarRegistros() {
     );
 }
 
+// Exportar backup dos registros
+function exportarBackup() {
+    const backup = {
+        aplicativo: "Meu Ganho",
+        dataBackup: new Date().toISOString(),
+        registros: registros
+    };
+
+    const arquivo = new Blob(
+        [JSON.stringify(backup, null, 2)],
+        { type: "application/json" }
+    );
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(arquivo);
+    link.download = `backup-meu-ganho-${obterDataHoje()}.json`;
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+}
+
+document.getElementById("btnExportar").addEventListener("click", exportarBackup);
+
+// Restaurar backup dos registros
+document.getElementById("arquivoBackup").addEventListener("change", function(event) {
+    const arquivo = event.target.files[0];
+
+    if (!arquivo) return;
+
+    const leitor = new FileReader();
+
+    leitor.onload = function(e) {
+        try {
+            const backup = JSON.parse(e.target.result);
+
+            if (
+    backup.aplicativo !== "Meu Ganho" ||
+    !Array.isArray(backup.registros) ||
+    !backup.registros.every(registro =>
+        registro &&
+        Number.isFinite(registro.id) &&
+        /^\d{4}-\d{2}-\d{2}$/.test(registro.data) &&
+        Number.isFinite(registro.alicatinhos) &&
+        registro.alicatinhos >= 0 &&
+        Number.isFinite(registro.molinhas) &&
+        registro.molinhas >= 0 &&
+        Number.isFinite(registro.espatulas) &&
+        registro.espatulas >= 0 &&
+        Number.isFinite(registro.total) &&
+        registro.total >= 0
+    )
+) {
+    alert("Arquivo de backup inválido ou com registros incompletos!");
+    return;
+}
+            const confirmar = confirm(
+                `Foram encontrados ${backup.registros.length} registros.\n\n` +
+                "Deseja restaurar esse backup? Os registros atuais serão substituídos."
+            );
+
+            if (!confirmar) return;
+
+            if (!confirmar) return;
+
+// Criar backup dos dados atuais antes da restauração
+const backupAtual = {
+    aplicativo: "Meu Ganho",
+    dataBackup: new Date().toISOString(),
+    registros: registros
+};
+
+const arquivoAtual = new Blob(
+    [JSON.stringify(backupAtual, null, 2)],
+    { type: "application/json" }
+);
+
+const linkAtual = document.createElement("a");
+
+linkAtual.href = URL.createObjectURL(arquivoAtual);
+linkAtual.download = `backup-anterior-meu-ganho-${obterDataHoje()}.json`;
+
+linkAtual.click();
+
+URL.revokeObjectURL(linkAtual.href);
+
+// Restaurar os novos registros
+registros = backup.registros;
+
+            registros = backup.registros;
+
+            salvarRegistros();
+            atualizarDashboard();
+
+            alert("Backup restaurado com sucesso!");
+
+        } catch (erro) {
+            alert("Não foi possível ler esse arquivo de backup.");
+        }
+
+        event.target.value = "";
+    };
+
+    leitor.readAsText(arquivo);
+});
+
   
 function atualizarGrafico() {
     const filtro = document.getElementById("filtroGrafico");

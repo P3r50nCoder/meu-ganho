@@ -497,3 +497,45 @@ button:not(.btn-excluir) {
 #comparacaoMes.negativo {
     color: #ff6464;
 }
+
+/* Segurança e backup */
+.backup {
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(16, 30, 23, 0.9);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+    border-radius: 15px;
+}
+
+.backup h2 {
+    color: #2ecc71;
+    margin-bottom: 18px;
+}
+
+.backup button,
+.backup label {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #16834a;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.backup button:hover,
+.backup label:hover {
+    background: #20a85f;
+}
+
+.backup input {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    color: white;
+}
