@@ -25,6 +25,42 @@
             <p id="totalMes">R$ 0,00</p>
         </section>
 
+        <section class="grafico-card">
+    <div class="grafico-cabecalho">
+        <div>
+            <h2>Evolução dos ganhos</h2>
+            <p>Acompanhe sua produção mês a mês</p>
+        </div>
+
+        <select id="filtroGrafico">
+            <option value="3">3 meses</option>
+            <option value="6" selected>6 meses</option>
+            <option value="12">12 meses</option>
+        </select>
+    </div>
+
+    <div class="grafico-resumo">
+        <div>
+            <span>Total no período</span>
+            <strong id="totalPeriodo">R$ 0,00</strong>
+        </div>
+
+        <div>
+            <span>Comparação mensal</span>
+            <strong id="comparacaoMes">Sem dados</strong>
+        </div>
+
+        <div>
+    <span>Melhor mês</span>
+    <strong id="maiorGanho">Sem dados</strong>
+        </div>
+    </div>
+
+    <div id="graficoBarras" class="grafico-barras">
+        <p>Carregando gráfico...</p>
+    </div>
+</section>
+
         <section class="producao">
             <h2>Registrar produção</h2>
 

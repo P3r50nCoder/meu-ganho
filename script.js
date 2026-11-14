@@ -42,6 +42,131 @@ function salvarRegistros() {
     );
 }
 
+  
+function atualizarGrafico() {
+    const filtro = document.getElementById("filtroGrafico");
+    const grafico = document.getElementById("graficoBarras");
+    const totalPeriodo = document.getElementById("totalPeriodo");
+    const comparacaoMes = document.getElementById("comparacaoMes");
+    const maiorGanho = document.getElementById("maiorGanho");
+
+    if (!filtro || !grafico || !totalPeriodo ||
+    !comparacaoMes || !maiorGanho) {
+    return;
+}
+
+    const quantidadeMeses = Number(filtro.value);
+    const agora = new Date();
+    const meses = [];
+
+    for (let i = quantidadeMeses - 1; i >= 0; i--) {
+        const data = new Date(
+            agora.getFullYear(),
+            agora.getMonth() - i,
+            1
+        );
+
+        const ano = data.getFullYear();
+        const mes = String(data.getMonth() + 1).padStart(2, "0");
+
+        meses.push({
+            chave: `${ano}-${mes}`,
+            nome: data.toLocaleDateString("pt-BR", {
+                month: "short"
+            }).replace(".", ""),
+            total: 0
+        });
+    }
+
+    meses.forEach(mes => {
+        mes.total = registros
+            .filter(registro => registro.data.startsWith(mes.chave))
+            .reduce((total, registro) => total + registro.total, 0);
+    });
+
+    const somaPeriodo = meses.reduce(
+        (total, mes) => total + mes.total, 0
+    );
+
+    totalPeriodo.textContent = formatarDinheiro(somaPeriodo);
+
+    // Identificar o mês com maior ganho
+const maiorTotal = Math.max(
+    ...meses.map(mes => mes.total)
+);
+
+const melhorMes = meses.find(
+    mes => mes.total === maiorTotal && maiorTotal > 0
+);
+
+maiorGanho.textContent = melhorMes
+    ? `${melhorMes.nome} - ${formatarDinheiro(melhorMes.total)}`
+    : "Sem dados";
+
+    const mesAtual = meses[meses.length - 1];
+    const mesAnterior = meses[meses.length - 2];
+
+    if (mesAnterior && mesAnterior.total > 0) {
+        const variacao =
+            ((mesAtual.total - mesAnterior.total) / mesAnterior.total) * 100;
+
+        const sinal = variacao > 0 ? "+" : "";
+
+        comparacaoMes.textContent =
+            `${sinal}${variacao.toFixed(1)}%`;
+    } else if (mesAtual.total > 0 && mesAnterior) {
+        comparacaoMes.textContent = "Sem base anterior";
+    } else {
+        comparacaoMes.textContent = "Sem dados";
+    }
+
+    const maiorValor = Math.max(
+        ...meses.map(mes => mes.total),
+        1
+    );
+
+    grafico.innerHTML = "";
+
+meses.forEach(mes => {
+    const coluna = document.createElement("div");
+    coluna.className = "grafico-coluna";
+
+    // Destacar o mês atual
+    const chaveMesAtual = obterDataHoje().substring(0, 7);
+
+    if (mes.chave === chaveMesAtual) {
+        coluna.classList.add("mes-atual");
+    }
+
+    // Destacar o mês com maior ganho
+    if (maiorTotal > 0 && mes.total === maiorTotal) {
+        coluna.classList.add("maior-ganho");
+    }
+
+    const valor = document.createElement("span");
+    valor.className = "barra-valor";
+    valor.textContent = formatarDinheiro(mes.total);
+
+    const barra = document.createElement("div");
+    barra.className = "grafico-barra";
+    barra.style.height =
+        `${(mes.total / maiorValor) * 100}%`;
+
+    const nomeMes = document.createElement("span");
+    nomeMes.className = "grafico-mes";
+    nomeMes.textContent = mes.nome;
+
+    coluna.appendChild(valor);
+    coluna.appendChild(barra);
+    coluna.appendChild(nomeMes);
+
+    grafico.appendChild(coluna);
+});
+}
+// Atualizar gráfico ao trocar o filtro
+document.getElementById("filtroGrafico")
+    ?.addEventListener("change", atualizarGrafico);
+
 // Atualizar dashboard e histórico
 function atualizarDashboard() {
 
@@ -58,6 +183,8 @@ function atualizarDashboard() {
     );
 
     exibicaoTotal.textContent = formatarDinheiro(totalMes);
+
+    atualizarGrafico();
 
     if (registros.length === 0) {
         listaHistorico.innerHTML =

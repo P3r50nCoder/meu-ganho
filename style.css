@@ -253,3 +253,247 @@ button:hover {
         font-size: 24px;
     }
 }
+body {
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.72),
+            rgba(0, 0, 0, 0.82)
+        ),
+        url("./assets/fundo-meu-ganho.png")
+        center / cover fixed no-repeat;
+
+    background-color: #050907;
+}
+
+
+/* ===== GLASSMORPHISM - MEU GANHO ===== */
+
+/* Cartão principal de ganhos */
+.resumo {
+    background: linear-gradient(
+        135deg,
+        rgba(20, 45, 32, 0.82),
+        rgba(10, 25, 18, 0.72)
+    );
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(54, 211, 153, 0.28);
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Painéis de produção e histórico */
+.producao,
+.historico {
+    background: rgba(12, 22, 16, 0.78);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(54, 211, 153, 0.20);
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+/* Efeito ao passar o mouse */
+.producao:hover,
+.historico:hover {
+    border-color: rgba(54, 211, 153, 0.45);
+}
+
+/* Campos com aparência mais moderna */
+input {
+    background: rgba(0, 0, 0, 0.30);
+    border: 1px solid rgba(54, 211, 153, 0.18);
+    border-radius: 10px;
+}
+
+/* Botão principal */
+button:not(.btn-excluir) {
+    background: linear-gradient(135deg, #198754, #20b878);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(32, 184, 120, 0.18);
+}
+
+/* Registros do histórico */
+.registro {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* ===== GRÁFICO DE EVOLUÇÃO ===== */
+
+.grafico-card {
+    background: rgba(8, 25, 18, 0.88);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 25px 0;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.grafico-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.grafico-cabecalho h2 {
+    color: #2edc9b;
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.grafico-cabecalho p {
+    color: #b8c9c0;
+}
+
+#filtroGrafico {
+    background: #10251b;
+    color: white;
+    border: 1px solid #176b48;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.grafico-resumo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.grafico-resumo div {
+    background: rgba(30, 70, 50, 0.25);
+    border: 1px solid rgba(46, 204, 113, 0.15);
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.grafico-resumo span {
+    display: block;
+    color: #aabbb2;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.grafico-resumo strong {
+    color: #2edc9b;
+    font-size: 21px;
+}
+
+.grafico-barras {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    gap: 12px;
+    height: 240px;
+    padding: 15px 5px 0;
+    border-bottom: 1px solid rgba(46, 204, 113, 0.25);
+}
+
+.grafico-coluna {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.barra-valor {
+    color: #d9eee3;
+    font-size: 11px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.grafico-barra {
+    width: 65%;
+    max-width: 45px;
+    min-height: 3px;
+    background: linear-gradient(
+        to top,
+        #087c4b,
+        #2edc9b
+    );
+    border-radius: 8px 8px 2px 2px;
+    box-shadow: 0 0 12px rgba(46, 204, 113, 0.2);
+    transition: height 0.4s ease;
+}
+
+.grafico-mes {
+    color: #b8c9c0;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+@media (max-width: 500px) {
+    .grafico-card {
+        padding: 16px;
+    }
+
+    .grafico-resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .grafico-barras {
+        gap: 5px;
+        height: 210px;
+    }
+
+    .barra-valor {
+        font-size: 9px;
+    }
+
+    .grafico-barra {
+        width: 75%;
+    }
+}
+
+/* Destaque do mês atual */
+.grafico-coluna.mes-atual .grafico-mes {
+    color: #2edc9b;
+    font-weight: bold;
+}
+
+.grafico-coluna.mes-atual .grafico-barra {
+    background: linear-gradient(to top, #087c4b, #55ffc0);
+    box-shadow: 0 0 18px rgba(46, 220, 155, 0.5);
+}
+
+/* Destaque do mês com maior ganho */
+.grafico-coluna.maior-ganho .grafico-mes {
+    color: #ffe082;
+    font-weight: bold;
+}
+
+.grafico-coluna.maior-ganho .grafico-barra {
+    background: linear-gradient(to top, #b8860b, #ffe082);
+    box-shadow: 0 0 18px rgba(255, 224, 130, 0.35);
+}
+
+/* Comparação mensal */
+#comparacaoMes.positivo {
+    color: #2edc9b;
+}
+
+#comparacaoMes.negativo {
+    color: #ff6464;
+}
