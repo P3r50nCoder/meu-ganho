@@ -1,5 +1,6 @@
 
-const CACHE_NAME = "meu-ganho-v2";
+
+const CACHE_NAME = "meu-ganho-v3";
 
 const ARQUIVOS = [
     "./",
@@ -7,7 +8,8 @@ const ARQUIVOS = [
     "./style.css",
     "./script.js",
     "./manifest.json",
-    "./icon.png"
+    "./icon-192.png",
+    "./assets/fundo-meu-ganho.png"
 ];
 
 // Instala e armazena os arquivos
@@ -21,7 +23,7 @@ self.addEventListener("install", (event) => {
     self.skipWaiting();
 });
 
-// Ativa o cache
+// Ativa o novo cache
 self.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys().then((chaves) => {
@@ -30,10 +32,8 @@ self.addEventListener("activate", (event) => {
                     .filter((chave) => chave !== CACHE_NAME)
                     .map((chave) => caches.delete(chave))
             );
-        })
+        }).then(() => self.clients.claim())
     );
-
-    self.clients.claim();
 });
 
 // Responde usando o cache quando estiver offline
@@ -46,3 +46,4 @@ self.addEventListener("fetch", (event) => {
         })
     );
 });
+
